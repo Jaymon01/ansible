@@ -35,7 +35,7 @@
           type: iso
           iso_name: "ubuntu-22.04.3-live-server-amd64.iso"
         networks:
-          - network: "Pool-wide network associated with eth0"
+          - network: "VM-Net"
             mac: "{{ random_mac }}"
             ip: "{{ vm_ip }}"
             gateway: 10.10.15.1
