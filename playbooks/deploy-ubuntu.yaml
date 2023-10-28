@@ -36,8 +36,8 @@
 
     - name: Wait for VM
       hosts: "{{ vm_ip }}"
-      ansible.builtin.wait_for_connection:
-        timeout: 600
+        ansible.builtin.wait_for_connection:
+          timeout: 600
           
     - name: Add user
       hosts: "{{ vm_ip }}"
