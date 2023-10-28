@@ -1,0 +1,31 @@
+---
+- name: Deploy Ubuntu VM on XCP-ng
+  hosts: localhost
+  gather_facts: no
+  vars:
+    vm_name: "{{ name }}"
+    xcpng_password: "{{ password }}"
+  tasks:
+    - name: Generate random MAC address
+      set_fact:
+        random_mac: "{{ '00:16:3e:%02x:%02x:%02x'|format(hostvars['localhost']['ansible_random']['int'] % 256, hostvars['localhost']['ansible_random']['int'] % 256, hostvars['localhost']['ansible_random']['int'] % 256) }}"
+
+    - name: Create VM
+      xenapi_vm:
+        hostname: 10.10.15.5
+        username: root
+        password: {{ xcpng_password }}
+        name: {{ vm_name }}
+        template: "Ubuntu Jammy Jellyfish 22.04"
+        state: running
+        vcpus: 2
+        memory: 4096
+        disks:
+          - size: 40
+            sr: VM-Pool
+            device: 0
+            bootable: true
+        networks:
+          - network: "Pool-wide network associated with eth0"
+            mac: "{{ random_mac }}"
+        
