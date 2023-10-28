@@ -29,8 +29,8 @@
             sr: VM-Pool
         hardware:
           num_cpus: 2
-          num_cpus_per_socket: 2
-          memory_gb: 4
+          num_cpu_cores_per_socket: 2
+          memory_mb: 4096
         cdrom:
           type: iso
           iso_name: "ubuntu-22.04.3-live-server-amd64.iso"
