@@ -1,0 +1,18 @@
+docker:
+  hosts:
+    docker: 10.10.15.70
+    docker1: 10.10.15.71
+    docker2: 10.10.15.72
+    docker3: 10.10.15.73
+    docker4: 10.10.15.74
+    docker5: 10.10.15.75
+  vars:
+    ansible_user: ansible
+
+linux:
+  children:
+    docker:
+
+all:
+  children:
+    linux:
