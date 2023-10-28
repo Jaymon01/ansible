@@ -14,8 +14,8 @@
       xenapi_vm:
         hostname: 10.10.15.5
         username: root
-        password: {{ xcpng_password }}
-        name: {{ vm_name }}
+        password: "{{ xcpng_password }}"
+        name: "{{ vm_name }}"
         template: "Ubuntu Jammy Jellyfish 22.04"
         state: running
         vcpus: 2
