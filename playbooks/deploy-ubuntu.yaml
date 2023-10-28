@@ -23,22 +23,23 @@
         validate_certs: false
         name: "{{ vm_name }}"
         state: poweredon
-        template: "Ubuntu Jammy Jellyfish 22.04"
-        disks:
-          - size_gb: 40
-            sr: VM-Pool
-        hardware:
-          num_cpus: 2
-          num_cpu_cores_per_socket: 2
-          memory_mb: 4096
-        cdrom:
-          type: iso
-          iso_name: "ubuntu-22.04.3-live-server-amd64.iso"
+        template: "Docker-VM"
+        # disks:
+        #   - size_gb: 40
+        #     sr: VM-Pool
+        # hardware:
+        #   num_cpus: 2
+        #   num_cpu_cores_per_socket: 2
+        #   memory_mb: 4096
+        #   state: present
+        # cdrom:
+        #   type: iso
+        #   iso_name: "ubuntu-22.04.3-live-server-amd64.iso"
         networks:
-          - name: "Pool-wide network associated with eth0"
-            mac: "{{ random_mac }}"
+          - mac: "{{ random_mac }}"
             ip: "{{ vm_ip }}"
             gateway: 10.10.15.1
+            # state: present
       delegate_to: localhost
       register: deploy
 
