@@ -29,7 +29,24 @@
         networks:
           - network: "Pool-wide network associated with eth0"
             mac: "{{ random_mac }}"
-        wait_for_ip_address: true
+            ip: "{{ vm_ip }}"
+            gateway: 10.10.15.1
       delegate_to: localhost
       register: deploy
+
+    - name: Wait for VM
+      hosts: "{{ vm_ip }}"
+      ansible.builtin.wait_for_connection:
+        timeout: 600
+          
+    - name: Add user
+      hosts: "{{ vm_ip }}"
+      ansible.builtin.user:
+        name: "{{ vm_user }}"
+        password: "{{ vm_password }}"
+        shell: /bin/bash
+        groups: sudo
+        append: yes
+        state: present
+        update_password: always
         
